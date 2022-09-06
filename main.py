@@ -1,12 +1,14 @@
+import csv
+
 import requests
 from bs4 import BeautifulSoup
-import csv
+
 from config import *
 
 
 def read():
-    plist=[]
-    kv={}
+    plist = []
+    kv = {}
     for i in projRepoUrl:
         html = requests.get(projRepoUrl[i]).text
         b = BeautifulSoup(html, "html.parser").table.tbody
@@ -16,9 +18,9 @@ def read():
         # rearrange dict struct
         for j in d:
             if j not in kv:
-                kv[j]={i:d[j]["code"]}
+                kv[j] = {i: d[j]["code"]}
             else:
-                kv[j].update({i:d[j]["code"]})
+                kv[j].update({i: d[j]["code"]})
     return kv, plist
 
 
@@ -31,11 +33,10 @@ def main():
             st = []
             for i in rlist:
                 if i not in kv[pname]:
-                    st+=[""]
+                    st += [""]
                 else:
-                    st+=[kv[pname][i]]
-            writer.writerow([pname]+st)
-
+                    st += [kv[pname][i]]
+            writer.writerow([pname] + st)
 
 
 if __name__ == '__main__':
