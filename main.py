@@ -6,7 +6,15 @@ from bs4 import BeautifulSoup
 from config import *
 
 
+def getGiteeData(plist):
+    # todo: show specific branch status not only newest commit
+    for p in plist:
+
+    pass
+
+
 def read():
+    # todo: auto get branched packages status
     plist = []
     kv = {}
     for i in projRepoUrl:
